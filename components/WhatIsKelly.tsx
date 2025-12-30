@@ -109,8 +109,7 @@ export default function WhatIsKelly() {
                     transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
                     className={`${item.color} rounded-xl p-4 text-center hover:scale-105 hover:shadow-lg transition-all cursor-pointer group`}
                   >
-                    <item.Icon className={`w-8 h-8 mx-auto mb-2 ${item.iconColor} group-hover:scale-110 transition-transform`} /
-                    <div className="text-3xl mb-2">{item.icon}</div>
+                    <item.Icon className={`w-8 h-8 mx-auto mb-2 ${item.iconColor} group-hover:scale-110 transition-transform`} />
                     <div className="text-sm font-semibold text-gray-800">{item.label}</div>
                   </motion.div>
                 ))}

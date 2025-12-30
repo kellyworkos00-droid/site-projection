@@ -62,7 +62,7 @@ export default function WhoItsFor() {
             Built for Growing Businesses
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Whether you're in retail, wholesale, manufacturing, or distribution — 
+            Whether you&apos;re in retail, wholesale, manufacturing, or distribution — 
             Kelly Work OS adapts to your business needs.
           </p>
         </motion.div>
@@ -116,7 +116,7 @@ export default function WhoItsFor() {
         >
           <div className="bg-white rounded-2xl p-8 shadow-xl inline-block">
             <p className="text-lg text-gray-700 mb-4">
-              <strong>Don't see your industry?</strong> Kelly Work OS is flexible and customizable.
+              <strong>Don&apos;t see your industry?</strong> Kelly Work OS is flexible and customizable.
             </p>
             <a
               href="#get-started"

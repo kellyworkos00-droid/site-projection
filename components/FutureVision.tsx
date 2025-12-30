@@ -68,7 +68,7 @@ export default function FutureVision() {
             The Future of Kelly Work OS
           </h2>
           <p className="text-xl text-blue-200 max-w-3xl mx-auto">
-            We're constantly innovating and adding new features to help your business thrive.
+            We&apos;re constantly innovating and adding new features to help your business thrive.
           </p>
         </motion.div>
 
