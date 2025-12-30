@@ -13,9 +13,24 @@ export default function Footer() {
               </div>
               <span className="text-xl font-bold text-white">Kelly Work OS</span>
             </div>
-            <p className="text-gray-400 max-w-md">
+            <p className="text-gray-400 max-w-md mb-4">
               An all-in-one business operating system for invoices, inventory, finance, teams, projects, and analytics — built for growing companies.
             </p>
+            <div className="text-sm text-gray-500">
+              <p className="mb-1">
+                <span className="text-gray-400 font-semibold">Founded by:</span> Zachary Ndegwa
+              </p>
+              <p className="mb-1">
+                <a href="mailto:kellyworkos00@gmail.com" className="hover:text-blue-400 transition-colors">
+                  kellyworkos00@gmail.com
+                </a>
+              </p>
+              <p>
+                <a href="tel:+254798293831" className="hover:text-blue-400 transition-colors">
+                  +254 798 293 831
+                </a>
+              </p>
+            </div>
           </div>
 
           {/* Quick Links */}
