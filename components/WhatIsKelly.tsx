@@ -92,7 +92,8 @@ export default function WhatIsKelly() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                {[Icon: BarChart3, label: 'Dashboard', color: 'bg-purple-100', iconColor: 'text-purple-600' },
+                {[
+                  { Icon: BarChart3, label: 'Dashboard', color: 'bg-purple-100', iconColor: 'text-purple-600' },
                   { Icon: FileText, label: 'Invoices', color: 'bg-blue-100', iconColor: 'text-blue-600' },
                   { Icon: Package, label: 'Inventory', color: 'bg-green-100', iconColor: 'text-green-600' },
                   { Icon: DollarSign, label: 'Finance', color: 'bg-yellow-100', iconColor: 'text-yellow-600' },
