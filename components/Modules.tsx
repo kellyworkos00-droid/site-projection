@@ -3,13 +3,22 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { BarChart3, TrendingUp, FileText, Package, DollarSign, Users, UserCog, FolderOpen, ClipboardList, Calendar, Settings } from 'lucide-react';
+import { BarChart3, TrendingUp, FileText, Package, DollarSign, Users, UserCog, FolderOpen, ClipboardList, Calendar, Settings, Bot } from 'lucide-react';
 
 export default function Modules() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const modules = [
+    {
+      Icon: Bot,
+      title: 'Kelly AI Assistant',
+      description: 'Intelligent AI that understands your business and helps you make better decisions.',
+      details: ['Smart business insights', 'Automated report generation', 'Predictive analytics', 'Natural language queries', 'Task automation'],
+      users: 'All Users',
+      color: 'from-violet-500 to-purple-600',
+      featured: true,
+    },
     {
       Icon: BarChart3,
       title: 'Dashboard',

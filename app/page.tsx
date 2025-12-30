@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import WhatIsKelly from "@/components/WhatIsKelly";
 import HowItWorks from "@/components/HowItWorks";
+import KellyAI from "@/components/KellyAI";
 import Modules from "@/components/Modules";
 import RealTimeConnection from "@/components/RealTimeConnection";
 import BranchSupport from "@/components/BranchSupport";
@@ -21,6 +22,7 @@ export default function Home() {
       <Navigation />
       <Hero />
       <WhatIsKelly />
+      <KellyAI />
       <HowItWorks />
       <Modules />
       <RealTimeConnection />

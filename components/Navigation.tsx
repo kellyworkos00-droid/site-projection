@@ -9,6 +9,7 @@ export default function Navigation() {
 
   const navLinks = [
     { href: '#what-is-kelly', label: 'What is Kelly OS' },
+    { href: '#kelly-ai', label: 'Kelly AI' },
     { href: '#how-it-works', label: 'How It Works' },
     { href: '#modules', label: 'Features' },
     { href: '#pricing', label: 'Pricing' },
