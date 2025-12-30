@@ -124,7 +124,17 @@ export default function RealTimeConnection() {
 
                   {/* Updates Grid */}
                   <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {scenario.upda{`relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4 border-2 transition-all ${
+                    {scenario.updates.map((update, updateIndex) => (
+                      <motion.div
+                        key={updateIndex}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={
+                          activeAction === index
+                            ? { opacity: 1, scale: 1 }
+                            : { opacity: 0.7, scale: 0.95 }
+                        }
+                        transition={{ duration: 0.3, delay: updateIndex * 0.1 }}
+                        className={`relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4 border-2 transition-all ${
                           activeAction === index ? 'border-blue-400 shadow-lg' : 'border-gray-200'
                         }`}
                       >
@@ -153,17 +163,7 @@ export default function RealTimeConnection() {
                                 transition={{ duration: 2, repeat: Infinity }}
                                 className="absolute inset-0 bg-green-400 rounded-full"
                               />
-                            </motion.divdiv className="text-sm font-bold text-gray-900 mb-1">
-                              {update.module}
-                            </div>
-                            <div className="text-xs text-gray-600">{update.effect}</div>
-                          </div>
-                          {activeAction === index && (
-                            <motion.div
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              className="w-2 h-2 bg-green-500 rounded-full"
-                            />
+                            </motion.div>
                           )}
                         </div>
                       </motion.div>
