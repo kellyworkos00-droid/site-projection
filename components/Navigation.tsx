@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,97 +14,92 @@ export default function Navigation() {
     { href: '#how-it-works', label: 'How It Works' },
     { href: '#modules', label: 'Features' },
     { href: '#pricing', label: 'Pricing' },
+    { href: '#get-started', label: 'Get Started', cta: true },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+      {/* Floating Glassmorphism Header */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-full shadow-2xl"
+      >
+        <div className="flex items-center px-4 py-3">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-400 rounded-lg flex items-center justify-center">
+          <Link href="/" className="flex items-center space-x-2 mr-6">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-400 rounded-lg flex items-center justify-center hover:scale-110 transition-transform">
               <span className="text-white font-bold text-xl">K</span>
             </div>
-            <span className="text-xl font-bold text-gray-900">Kelly Work OS</span>
+            <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hidden sm:inline">
+              Kelly Work OS
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href="#get-started"
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
-            >
-              Get Started
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
+          {/* Menu Button */}
+          <motion.button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100"
-            aria-label="Toggle menu"
+            className="flex items-center gap-2 text-white font-semibold px-4 py-2 rounded-full hover:bg-white/10 transition-all"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            Menu
+            <motion.div
+              animate={{ rotate: isOpen ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
             >
-              {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
+              <ChevronDown className="w-4 h-4" />
+            </motion.div>
+          </motion.button>
         </div>
 
-        {/* Mobile Menu */}
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="md:hidden py-4 space-y-3"
-          >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block text-gray-700 hover:text-blue-600 transition-colors font-medium py-2"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href="#get-started"
-              onClick={() => setIsOpen(false)}
-              className="block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium text-center"
+        {/* Dropdown Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-full left-0 right-0 mt-3 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden"
             >
-              Get Started
-            </Link>
-          </motion.div>
-        )}
-      </div>
+              <div className="py-3 px-4 space-y-1 min-w-max">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className={`
+                        block px-4 py-2.5 rounded-lg transition-all duration-200
+                        ${link.cta
+                          ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:from-blue-700 hover:to-purple-700 hover:shadow-lg'
+                          : 'text-white/90 hover:text-white hover:bg-white/10 font-medium'
+                        }
+                      `}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* Click outside to close */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 -z-10"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
     </nav>
   );
 }
