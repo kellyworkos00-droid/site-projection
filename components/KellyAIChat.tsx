@@ -23,46 +23,217 @@ export default function KellyAIChat() {
   ];
 
   const demoResponses: { [key: string]: any } = {
+    // Core Questions
     "how does kelly os work": {
-      text: "Kelly Work OS is an all-in-one business operating system that connects invoices, inventory, finance, teams, and analytics. Kelly AI reads data from all these modules to give you clear insights and recommendations.",
-      insight: "Everything syncs in real-time — when you create an invoice, inventory updates automatically, and Kelly AI tracks the impact on your business."
-    },
-    "what can kelly ai do": {
-      text: "Kelly AI is your business co-pilot. I can:",
+      text: "Kelly Work OS connects all your business operations in real-time. Here's how:",
       bullets: [
-        "Answer questions like 'Why are sales low this month?'",
-        "Suggest when to restock products",
-        "Flag unusual expenses or risks",
-        "Generate daily, weekly, and monthly reports",
-        "Compare branch performance",
-        "Predict inventory needs"
+        "📊 All modules sync automatically - invoices update inventory and finances",
+        "🤖 Kelly AI monitors everything 24/7",
+        "📱 Access from anywhere - web, mobile, or tablet",
+        "👥 Team collaboration with role-based permissions",
+        "📈 Real-time analytics and insights"
+      ],
+      insight: "When you create an invoice, inventory updates automatically, Kelly AI tracks profit margins, and your finance dashboard reflects changes instantly."
+    },
+    
+    "what can kelly ai do": {
+      text: "As your business co-pilot, I provide intelligent insights and automation:",
+      bullets: [
+        "💡 Answer: 'Why are sales down?' - I analyze trends and explain causes",
+        "📦 Predict: When to restock based on sales velocity",
+        "⚠️ Alert: Flag unusual expenses or customer payment delays",
+        "📊 Generate: Financial reports in seconds",
+        "🏢 Compare: Multi-branch performance metrics",
+        "🎯 Recommend: Growth opportunities based on your data"
       ],
       demo: "Example based on typical retail business"
     },
+    
     "is kelly right for my business": {
-      text: "Based on your business size, Kelly OS can reduce manual work by over 40%. It's perfect for:",
+      text: "Kelly OS reduces manual work by 40% and is perfect for:",
       bullets: [
-        "Growing retail businesses",
-        "Wholesale operations",
-        "Manufacturing companies",
-        "Multi-branch businesses",
-        "Service providers"
+        "🏪 Retail: Track inventory, sales, and customer orders",
+        "📦 Wholesale: Manage bulk orders and supplier relationships",
+        "🏭 Manufacturing: Production tracking and material management",
+        "🏢 Multi-branch: Centralized control with branch autonomy",
+        "💼 Services: Project management and time tracking"
       ],
       cta: true
     },
+    
     "see example insights": {
-      text: "Here's an example of Kelly AI in action:",
-      insight: "Your cement sales dropped 18% this week. Two competitors lowered prices. Consider adjusting price or bundling.",
+      text: "Here's Kelly AI analyzing a real business scenario:",
+      insight: "🎯 Your cement sales dropped 18% this week. Analysis: Two competitors lowered prices by 12%. Recommendation: Bundle cement with sand (margin +8%) or match competitor pricing temporarily.",
       metrics: [
         { label: "Sales Trend", value: "-18%", color: "text-red-600" },
-        { label: "Top Product", value: "Cement 50kg", color: "text-blue-600" },
+        { label: "Competitor Impact", value: "High", color: "text-orange-600" },
         { label: "Stock Level", value: "82%", color: "text-green-600" }
       ],
       demo: "Example insight - connect Kelly OS to see your real data"
     },
+    
+    // Sales Questions
+    "sales": {
+      text: "Sales Analytics Example:",
+      bullets: [
+        "📈 Daily Revenue: KES 245,000 (+12% vs yesterday)",
+        "🏆 Top Product: Cement 50kg (120 units sold)",
+        "👤 Best Seller: John - KES 85,000",
+        "📊 Conversion Rate: 68%"
+      ],
+      insight: "Your morning sales (8am-12pm) generate 45% of daily revenue. Consider staffing optimization.",
+      demo: "Example data from demo business"
+    },
+    
+    "inventory|stock": {
+      text: "Inventory Status Example:",
+      bullets: [
+        "📦 Total Items: 450 products",
+        "⚠️ Low Stock: 12 items need reordering",
+        "📉 Fast Moving: Cement, Iron sheets, Nails",
+        "💰 Inventory Value: KES 3.2M"
+      ],
+      insight: "Cement 50kg sells 40 bags/day. Current stock (80 bags) will last 2 days. Reorder now to avoid stockout.",
+      demo: "Example inventory analysis"
+    },
+    
+    "customers|clients": {
+      text: "Customer Intelligence Example:",
+      bullets: [
+        "👥 Total Customers: 342 active",
+        "💎 VIP Customers: 15 (60% of revenue)",
+        "📧 Pending Follow-ups: 8 customers",
+        "💰 Outstanding Payments: KES 450,000"
+      ],
+      insight: "Customer 'ABC Hardware' hasn't ordered in 21 days (usually orders every 14 days). Recommendation: Send follow-up with 5% loyalty discount.",
+      demo: "Example customer data"
+    },
+    
+    "profit|revenue|income": {
+      text: "Financial Performance Example:",
+      bullets: [
+        "💵 Monthly Revenue: KES 7.2M",
+        "💰 Gross Profit: KES 2.1M (29% margin)",
+        "📊 Net Profit: KES 1.4M",
+        "📈 Growth: +15% vs last month"
+      ],
+      metrics: [
+        { label: "Revenue", value: "7.2M", color: "text-green-600" },
+        { label: "Profit", value: "1.4M", color: "text-blue-600" },
+        { label: "Growth", value: "+15%", color: "text-green-600" }
+      ],
+      insight: "Your profit margin improved 3% after optimizing supplier pricing. Top profitable product: Iron sheets (42% margin).",
+      demo: "Example financial data"
+    },
+    
+    "expenses|costs": {
+      text: "Expense Analysis Example:",
+      bullets: [
+        "💸 Monthly Expenses: KES 5.1M",
+        "📦 Inventory: 65% of expenses",
+        "👥 Payroll: 20% of expenses",
+        "🏢 Operations: 15% of expenses"
+      ],
+      insight: "⚠️ Electricity costs increased 35% this month (KES 45,000 vs usual KES 33,000). Investigate equipment or usage changes.",
+      demo: "Example expense tracking"
+    },
+    
+    "team|staff|employees": {
+      text: "Team Performance Example:",
+      bullets: [
+        "👥 Team Size: 24 employees",
+        "🏆 Top Performer: John (85 sales, KES 450K)",
+        "📊 Average: 42 sales per person",
+        "⏰ Attendance: 96% this month"
+      ],
+      insight: "Sarah's sales doubled after product training. Recommendation: Schedule training for 3 other team members.",
+      demo: "Example HR data"
+    },
+    
+    // Predictive Questions
+    "predict|forecast": {
+      text: "AI Predictions Example:",
+      bullets: [
+        "📈 Next Month Sales: KES 8.1M (expected)",
+        "📦 Restock Needed: 15 products in next 7 days",
+        "💰 Cash Flow: Positive KES 1.2M",
+        "👥 Hiring Need: +2 sales staff recommended"
+      ],
+      insight: "Based on 6-month trends, December sales will peak at KES 9.5M. Increase inventory by 30% to avoid stockouts.",
+      demo: "AI-powered predictions"
+    },
+    
+    "best|top products": {
+      text: "Top Products This Month:",
+      bullets: [
+        "🥇 Cement 50kg: 1,200 bags (KES 840,000)",
+        "🥈 Iron Sheets: 450 units (KES 720,000)",
+        "🥉 Paint 20L: 280 units (KES 560,000)"
+      ],
+      insight: "Cement sales spike every Friday (construction day). Stock extra 200 bags on Thursdays.",
+      demo: "Example product performance"
+    },
+    
+    "problems|issues|alerts": {
+      text: "Business Alerts & Issues:",
+      bullets: [
+        "⚠️ 12 products below reorder point",
+        "💰 5 customers overdue payments (KES 180K)",
+        "📉 Sales -15% on Tuesdays (investigate)",
+        "🔧 3 pending equipment maintenance tasks"
+      ],
+      insight: "Critical: Customer 'XYZ Builders' payment overdue 45 days (KES 95,000). Recommendation: Call today + suspend new credit.",
+      demo: "Real-time business monitoring"
+    },
+    
+    "branches|locations": {
+      text: "Multi-Branch Performance:",
+      bullets: [
+        "🏢 Nairobi Branch: KES 4.2M (58% of total)",
+        "🏢 Mombasa Branch: KES 2.1M (29%)",
+        "🏢 Kisumu Branch: KES 900K (13%)"
+      ],
+      insight: "Nairobi branch profit margin (32%) is 8% higher than other branches. Best practice: Their supplier negotiation strategy.",
+      demo: "Example branch comparison"
+    },
+    
+    // Help & General
+    "help|what can you": {
+      text: "I'm Kelly AI, your business intelligence assistant. I can help you with:",
+      bullets: [
+        "📊 Sales analysis and trends",
+        "📦 Inventory management",
+        "💰 Financial insights",
+        "👥 Customer intelligence",
+        "🎯 Growth recommendations",
+        "⚠️ Business alerts"
+      ],
+      demo: "Ask me anything about running your business!"
+    },
+    
+    "price|pricing|cost": {
+      text: "Kelly Work OS Pricing:",
+      bullets: [
+        "💎 Starter: KES 4,999/month - 1 branch, 5 users",
+        "🚀 Professional: KES 9,999/month - 3 branches, unlimited users",
+        "🏢 Enterprise: Custom pricing - unlimited everything"
+      ],
+      cta: true,
+      demo: "All plans include Kelly AI and 24/7 support"
+    },
+    
+    // Default intelligent response
     "default": {
-      text: "I understand you're asking about business operations. In demo mode, I can show you examples of how Kelly AI helps businesses.",
-      demo: "Unlock full Kelly AI insights when you create your company workspace"
+      text: "I understand you're asking about your business. In demo mode, I can show examples of how Kelly AI helps with:",
+      bullets: [
+        "Sales & Revenue analysis",
+        "Inventory & Stock management", 
+        "Customer intelligence",
+        "Financial insights",
+        "Team performance",
+        "Predictive analytics"
+      ],
+      demo: "💡 Try asking: 'Show me sales data' or 'What about inventory?' or 'Predict next month'"
     }
   };
 
@@ -79,16 +250,27 @@ export default function KellyAIChat() {
       
       const lowercaseInput = userMessage.toLowerCase();
       let response = demoResponses.default;
+      let foundMatch = false;
       
+      // Check each response pattern
       for (const key in demoResponses) {
-        if (lowercaseInput.includes(key)) {
-          response = demoResponses[key];
-          break;
+        if (key === 'default') continue;
+        
+        // Split key by | for multiple patterns
+        const patterns = key.split('|');
+        for (const pattern of patterns) {
+          if (lowercaseInput.includes(pattern.trim())) {
+            response = demoResponses[key];
+            foundMatch = true;
+            break;
+          }
         }
+        
+        if (foundMatch) break;
       }
 
       setMessages(prev => [...prev, { type: 'ai', ...response }]);
-    }, 1500);
+    }, 1200);
   };
 
   const handleQuickAction = (question: string) => {
