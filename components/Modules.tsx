@@ -1,13 +1,444 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { BarChart3, TrendingUp, FileText, Package, DollarSign, Users, UserCog, FolderOpen, ClipboardList, Calendar, Settings, Bot } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { BarChart3, TrendingUp, FileText, Package, DollarSign, Users, UserCog, FolderOpen, ClipboardList, Calendar, Settings, Bot, X } from 'lucide-react';
+
+// Animated Character Component
+function AnimatedCharacter({ moduleTitle }: { moduleTitle: string }) {
+  const animations: Record<string, JSX.Element> = {
+    'Kelly AI Assistant': (
+      <div className="relative w-full h-64 flex items-center justify-center">
+        {/* AI Robot */}
+        <motion.div
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="relative"
+        >
+          {/* Head */}
+          <div className="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg relative mx-auto mb-2">
+            {/* Eyes */}
+            <motion.div
+              animate={{ scaleY: [1, 0.2, 1] }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="absolute top-6 left-4 w-3 h-3 bg-white rounded-full"
+            />
+            <motion.div
+              animate={{ scaleY: [1, 0.2, 1] }}
+              transition={{ duration: 3, repeat: Infinity, delay: 0.1 }}
+              className="absolute top-6 right-4 w-3 h-3 bg-white rounded-full"
+            />
+            {/* Smile */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-8 h-1 bg-white rounded-full" />
+          </div>
+          {/* Body */}
+          <div className="w-16 h-16 bg-gradient-to-b from-purple-500 to-purple-700 rounded-lg mx-auto mb-2" />
+          {/* Arms */}
+          <div className="flex justify-center gap-2">
+            <motion.div
+              animate={{ rotate: [0, -30, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-3 h-12 bg-purple-600 rounded"
+            />
+            <motion.div
+              animate={{ rotate: [0, 30, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-3 h-12 bg-purple-600 rounded"
+            />
+          </div>
+        </motion.div>
+        {/* Floating text */}
+        <motion.div
+          animate={{ opacity: [0, 1, 0], y: [-20, -40, -60] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute top-4 right-8 text-sm font-bold text-purple-600"
+        >
+          💡 Analyzing...
+        </motion.div>
+      </div>
+    ),
+    'Dashboard': (
+      <div className="relative w-full h-64 flex items-center justify-center">
+        {/* Dashboard Screen */}
+        <motion.div
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="w-40 h-32 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-3 relative"
+        >
+          {/* Screen Content */}
+          <div className="space-y-2">
+            <motion.div
+              animate={{ width: ['60%', '100%', '60%'] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="h-2 bg-white/30 rounded"
+            />
+            <div className="flex gap-1">
+              <motion.div
+                animate={{ height: ['100%', '60%', '100%'] }}
+                transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
+                className="flex-1 bg-white/30 rounded"
+              />
+              <motion.div
+                animate={{ height: ['60%', '100%', '60%'] }}
+                transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
+                className="flex-1 bg-white/30 rounded"
+              />
+            </div>
+          </div>
+        </motion.div>
+        {/* Person looking at screen */}
+        <motion.div
+          animate={{ x: [20, 0, 20] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute left-4 top-20"
+        >
+          <div className="w-8 h-8 bg-yellow-400 rounded-full mx-auto" />
+          <div className="w-6 h-8 bg-blue-500 mx-auto mt-1 rounded-sm" />
+        </motion.div>
+      </div>
+    ),
+    'Analytics': (
+      <div className="relative w-full h-64 flex items-center justify-center">
+        {/* Chart Bars */}
+        <div className="flex items-end gap-3 h-40">
+          <motion.div
+            animate={{ height: ['40%', '100%', '40%'] }}
+            transition={{ duration: 1, repeat: Infinity }}
+            className="w-4 bg-gradient-to-t from-orange-500 to-orange-400 rounded"
+          />
+          <motion.div
+            animate={{ height: ['60%', '100%', '60%'] }}
+            transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
+            className="w-4 bg-gradient-to-t from-orange-500 to-orange-400 rounded"
+          />
+          <motion.div
+            animate={{ height: ['80%', '100%', '80%'] }}
+            transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
+            className="w-4 bg-gradient-to-t from-orange-500 to-orange-400 rounded"
+          />
+          <motion.div
+            animate={{ height: ['50%', '100%', '50%'] }}
+            transition={{ duration: 1, repeat: Infinity, delay: 0.6 }}
+            className="w-4 bg-gradient-to-t from-orange-500 to-orange-400 rounded"
+          />
+        </div>
+        {/* Magnifying glass */}
+        <motion.div
+          animate={{ rotate: [0, 360] }}
+          transition={{ duration: 3, repeat: Infinity }}
+          className="absolute bottom-8 right-8 w-12 h-12 border-3 border-orange-500 rounded-full"
+        />
+      </div>
+    ),
+    'Invoices': (
+      <div className="relative w-full h-64 flex items-center justify-center">
+        {/* Invoice Document */}
+        <motion.div
+          animate={{ rotateZ: [-5, 5, -5], y: [0, -5, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="w-32 bg-white rounded-lg p-4 shadow-lg border-4 border-blue-500"
+        >
+          <div className="space-y-2">
+            <div className="h-2 bg-blue-500 w-16 rounded" />
+            <div className="h-1 bg-gray-300 w-full rounded" />
+            <div className="h-1 bg-gray-300 w-4/5 rounded" />
+            <div className="pt-2 border-t border-gray-300 mt-2">
+              <motion.div
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 1, repeat: Infinity }}
+                className="h-1 bg-green-500 w-12 rounded"
+              />
+              <div className="text-xs font-bold text-blue-600 mt-1">✓ PAID</div>
+            </div>
+          </div>
+        </motion.div>
+        {/* Money flying in */}
+        {[0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            animate={{
+              x: [0, 40],
+              y: [-40, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              delay: i * 0.3,
+            }}
+            className="absolute w-6 h-4 bg-green-500 rounded text-white text-xs flex items-center justify-center font-bold"
+          >
+            💵
+          </motion.div>
+        ))}
+      </div>
+    ),
+    'Inventory': (
+      <div className="relative w-full h-64 flex items-center justify-center">
+        {/* Boxes stacking */}
+        {[0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            animate={{
+              y: [0, -20, 0],
+              rotateZ: [-2, 2, -2],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              delay: i * 0.2,
+            }}
+            className={`absolute w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded flex items-center justify-center text-white font-bold`}
+            style={{ left: `${20 + i * 40}px`, top: `${80 - i * 30}px` }}
+          >
+            📦
+          </motion.div>
+        ))}
+      </div>
+    ),
+    'Accounts & Payments': (
+      <div className="relative w-full h-64 flex items-center justify-center">
+        {/* Wallet with flowing money */}
+        <div className="relative">
+          <motion.div
+            animate={{ rotate: [-5, 5, -5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-20 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg flex items-center justify-center text-3xl"
+          >
+            💳
+          </motion.div>
+          {/* Money flowing */}
+          {[0, 1, 2, 3].map((i) => (
+            <motion.div
+              key={i}
+              animate={{
+                x: [0, 40],
+                y: [-20, -60],
+                opacity: [1, 0],
+              }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                delay: i * 0.25,
+              }}
+              className="absolute text-lg"
+              style={{ left: '50%', top: '50%' }}
+            >
+              💰
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    ),
+    'Clients': (
+      <div className="relative w-full h-64 flex items-center justify-center">
+        {/* People network */}
+        {[
+          { x: 50, y: 50, delay: 0 },
+          { x: 150, y: 50, delay: 0.2 },
+          { x: 100, y: 120, delay: 0.4 },
+        ].map((pos, i) => (
+          <motion.div
+            key={i}
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 1, repeat: Infinity, delay: pos.delay }}
+            className="absolute w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold"
+            style={{ left: `${pos.x}px`, top: `${pos.y}px` }}
+          >
+            👤
+          </motion.div>
+        ))}
+        {/* Connection lines */}
+        <svg className="absolute w-48 h-40 pointer-events-none">
+          <motion.line
+            x1="50" y1="50" x2="100" y2="120"
+            stroke="#ec4899"
+            strokeWidth="2"
+            animate={{ strokeDasharray: ['0 1', '1 0'] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          <motion.line
+            x1="150" y1="50" x2="100" y2="120"
+            stroke="#ec4899"
+            strokeWidth="2"
+            animate={{ strokeDasharray: ['0 1', '1 0'] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+        </svg>
+      </div>
+    ),
+    'Team & HR': (
+      <div className="relative w-full h-64 flex items-center justify-center">
+        {/* Team members */}
+        <div className="flex gap-4">
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              animate={{
+                y: [0, -10, 0],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: i * 0.3,
+              }}
+              className="flex flex-col items-center"
+            >
+              <div className="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center text-white text-lg">
+                👨
+              </div>
+              <div className="w-8 h-6 bg-indigo-600 rounded-sm mt-1" />
+            </motion.div>
+          ))}
+        </div>
+        {/* Rating stars */}
+        <motion.div
+          animate={{ opacity: [0, 1, 0], y: [-20, -40] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute top-8 right-12 text-lg"
+        >
+          ⭐⭐⭐
+        </motion.div>
+      </div>
+    ),
+    'Files': (
+      <div className="relative w-full h-64 flex items-center justify-center">
+        {/* File stack */}
+        {[0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            animate={{
+              rotate: [0, 10, -10, 0],
+              x: [-10, 0, 10],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              delay: i * 0.3,
+            }}
+            className="absolute w-16 h-20 bg-white border-3 border-teal-500 rounded flex items-center justify-center font-bold text-teal-600"
+            style={{ left: `${80 + i * 15}px`, top: `${60 + i * 10}px` }}
+          >
+            📄
+          </motion.div>
+        ))}
+      </div>
+    ),
+    'Projects & Tasks': (
+      <div className="relative w-full h-64 flex items-center justify-center">
+        {/* Task list with progress */}
+        <div className="space-y-3 w-32">
+          {[0.4, 0.7, 1].map((progress, i) => (
+            <motion.div key={i} className="flex items-center gap-2">
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  delay: i * 0.3,
+                }}
+                className="w-4 h-4 bg-red-500 rounded"
+              />
+              <div className="flex-1 h-2 bg-gray-300 rounded overflow-hidden">
+                <motion.div
+                  animate={{ width: ['0%', `${progress * 100}%`] }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                  }}
+                  className="h-full bg-red-500"
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    ),
+    'Calendar': (
+      <div className="relative w-full h-64 flex items-center justify-center">
+        {/* Calendar grid */}
+        <motion.div
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="w-32 bg-white border-4 border-cyan-500 rounded-lg p-2"
+        >
+          {/* Calendar header */}
+          <div className="bg-cyan-500 text-white text-xs font-bold py-1 px-2 rounded text-center mb-2">
+            JAN
+          </div>
+          {/* Calendar grid */}
+          <div className="grid grid-cols-7 gap-1">
+            {Array.from({ length: 28 }).map((_, i) => (
+              <motion.div
+                key={i}
+                animate={
+                  i === 15
+                    ? {
+                        backgroundColor: ['rgba(6, 182, 212, 0.2)', 'rgba(6, 182, 212, 1)', 'rgba(6, 182, 212, 0.2)'],
+                      }
+                    : {}
+                }
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                }}
+                className="w-3 h-3 bg-cyan-500/20 rounded text-xs flex items-center justify-center"
+              />
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    ),
+    'Settings & Admin': (
+      <div className="relative w-full h-64 flex items-center justify-center">
+        {/* Gear spinning */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 4, repeat: Infinity, linear: true }}
+          className="absolute w-24 h-24 text-4xl"
+        >
+          ⚙️
+        </motion.div>
+        {/* Smaller gears */}
+        {[0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            animate={{ rotate: -360 }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              linear: true,
+            }}
+            className="absolute text-2xl"
+            style={{
+              left: `${80 + Math.cos((i * 120) * Math.PI / 180) * 50}px`,
+              top: `${60 + Math.sin((i * 120) * Math.PI / 180) * 50}px`,
+            }}
+          >
+            ⚙️
+          </motion.div>
+        ))}
+      </div>
+    ),
+  };
+
+  return (
+    <div className="w-full h-64 flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
+      {animations[moduleTitle] || (
+        <div className="text-center text-gray-500">
+          <div className="text-4xl mb-2">✨</div>
+          <p>Animation coming soon</p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Modules() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [selectedModule, setSelectedModule] = useState<typeof modules[0] | null>(null);
 
   const modules = [
     {
@@ -130,12 +561,15 @@ export default function Modules() {
         {/* Modules Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {modules.map((module, index) => (
-            <motion.div
+            <motion.button
               key={module.title}
+              onClick={() => setSelectedModule(module)}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="group relative bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-transparent hover:shadow-2xl transition-all duration-300"
+              className="group relative w-full bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-transparent hover:shadow-2xl transition-all duration-300 text-left cursor-pointer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               {/* Gradient Border Effect */}
               <div className={`absolute inset-0 bg-gradient-to-br ${module.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity -z-10`} />
@@ -170,16 +604,116 @@ export default function Modules() {
 
               {/* Users */}
               <div className="pt-4 border-t border-gray-200">
-                <div className="flex items-center text-sm">
-                  <svg className="w-4 h-4 text-gray-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
-                  </svg>
-                  <span className="text-gray-600 font-medium">{module.users}</span>
+                <div className="flex items-center text-sm justify-between">
+                  <div className="flex items-center">
+                    <svg className="w-4 h-4 text-gray-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                    </svg>
+                    <span className="text-gray-600 font-medium">{module.users}</span>
+                  </div>
+                  <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full font-semibold">Click to view</span>
                 </div>
               </div>
-            </motion.div>
+            </motion.button>
           ))}
         </div>
+
+        {/* Modal - Animated Module Demonstration */}
+        <AnimatePresence>
+          {selectedModule && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedModule(null)}
+              className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                onClick={(e) => e.stopPropagation()}
+                className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative"
+              >
+                {/* Close Button */}
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedModule(null)}
+                  className={`absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors`}
+                >
+                  <X className="w-6 h-6 text-gray-600" />
+                </motion.button>
+
+                {/* Header */}
+                <div className={`bg-gradient-to-br ${selectedModule.color} p-8 text-white rounded-t-3xl`}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center">
+                      <selectedModule.Icon className="w-8 h-8" />
+                    </div>
+                    <div>
+                      <h2 className="text-3xl font-bold">{selectedModule.title}</h2>
+                      <p className="text-white/90 mt-1">{selectedModule.description}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Animated Character Demo */}
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">See it in action</h3>
+                  <AnimatedCharacter moduleTitle={selectedModule.title} />
+
+                  {/* Features List */}
+                  <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {selectedModule.details.map((detail, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg"
+                      >
+                        <motion.div
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: i * 0.1 }}
+                          className="text-xl flex-shrink-0"
+                        >
+                          ✨
+                        </motion.div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-900">{detail}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Users Info */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className={`mt-8 p-4 bg-gradient-to-br ${selectedModule.color} bg-opacity-10 rounded-xl border-2 border-opacity-20 border-current`}
+                  >
+                    <p className="text-sm text-gray-600">
+                      <strong>For:</strong> {selectedModule.users}
+                    </p>
+                  </motion.div>
+
+                  {/* CTA Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setSelectedModule(null)}
+                    className={`w-full mt-8 bg-gradient-to-br ${selectedModule.color} text-white font-bold py-3 rounded-xl transition-all hover:shadow-lg`}
+                  >
+                    Get Started with {selectedModule.title}
+                  </motion.button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Connection Indicator */}
         <motion.div
