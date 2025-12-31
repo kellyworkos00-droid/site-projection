@@ -9,126 +9,403 @@ import { BarChart3, TrendingUp, FileText, Package, DollarSign, Users, UserCog, F
 function AnimatedCharacter({ moduleTitle }: { moduleTitle: string }) {
   const animations: Record<string, JSX.Element> = {
     'Kelly AI Assistant': (
-      <div className="relative w-full h-64 flex items-center justify-center">
-        {/* AI Robot */}
+      <div className="relative w-full h-64 flex items-center justify-center overflow-hidden bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 rounded-2xl">
+        {/* Floating particles */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              y: [0, -100, 0],
+              x: [0, Math.sin(i) * 50, 0],
+              opacity: [0, 0.6, 0],
+            }}
+            transition={{
+              duration: 3 + i * 0.5,
+              repeat: Infinity,
+              delay: i * 0.4,
+            }}
+            className="absolute w-2 h-2 bg-violet-400 rounded-full blur-sm"
+            style={{ left: `${20 + i * 10}%`, top: '80%' }}
+          />
+        ))}
+        
+        {/* AI Robot with premium effects */}
         <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="relative"
+          animate={{ 
+            y: [0, -15, 0],
+            rotateZ: [-2, 2, -2],
+          }}
+          transition={{ 
+            duration: 3, 
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="relative z-10"
         >
-          {/* Head */}
-          <div className="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg relative mx-auto mb-2">
-            {/* Eyes */}
+          {/* Glow effect */}
+          <motion.div
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute inset-0 bg-violet-500 rounded-2xl blur-2xl -z-10"
+          />
+          
+          {/* Head with shadow */}
+          <div className="w-24 h-24 bg-gradient-to-br from-violet-500 via-purple-600 to-indigo-600 rounded-2xl relative mx-auto mb-2 shadow-2xl">
+            {/* Antenna */}
             <motion.div
-              animate={{ scaleY: [1, 0.2, 1] }}
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              className="absolute -top-3 left-1/2 -translate-x-1/2"
+            >
+              <div className="w-1 h-4 bg-violet-400 rounded-full" />
+              <div className="w-3 h-3 bg-violet-300 rounded-full -mt-1 ml-[-4px] shadow-lg shadow-violet-500/50" />
+            </motion.div>
+            
+            {/* Eyes with glow */}
+            <motion.div
+              animate={{ 
+                scaleY: [1, 0.1, 1],
+                boxShadow: ['0 0 10px rgba(139, 92, 246, 0.5)', '0 0 5px rgba(139, 92, 246, 0.2)', '0 0 10px rgba(139, 92, 246, 0.5)'],
+              }}
               transition={{ duration: 3, repeat: Infinity }}
-              className="absolute top-6 left-4 w-3 h-3 bg-white rounded-full"
+              className="absolute top-7 left-5 w-4 h-4 bg-cyan-300 rounded-full shadow-lg shadow-cyan-500/50"
             />
             <motion.div
-              animate={{ scaleY: [1, 0.2, 1] }}
+              animate={{ 
+                scaleY: [1, 0.1, 1],
+                boxShadow: ['0 0 10px rgba(139, 92, 246, 0.5)', '0 0 5px rgba(139, 92, 246, 0.2)', '0 0 10px rgba(139, 92, 246, 0.5)'],
+              }}
               transition={{ duration: 3, repeat: Infinity, delay: 0.1 }}
-              className="absolute top-6 right-4 w-3 h-3 bg-white rounded-full"
+              className="absolute top-7 right-5 w-4 h-4 bg-cyan-300 rounded-full shadow-lg shadow-cyan-500/50"
             />
-            {/* Smile */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-8 h-1 bg-white rounded-full" />
+            
+            {/* Smile with animation */}
+            <motion.div
+              animate={{ scaleX: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute bottom-4 left-1/2 -translate-x-1/2 w-10 h-2 bg-white rounded-full shadow-inner"
+            />
           </div>
-          {/* Body */}
-          <div className="w-16 h-16 bg-gradient-to-b from-purple-500 to-purple-700 rounded-lg mx-auto mb-2" />
-          {/* Arms */}
-          <div className="flex justify-center gap-2">
+          
+          {/* Body with gradient */}
+          <div className="w-20 h-20 bg-gradient-to-b from-purple-500 via-purple-600 to-purple-800 rounded-2xl mx-auto mb-2 shadow-2xl relative overflow-hidden">
+            {/* Chest light */}
             <motion.div
-              animate={{ rotate: [0, -30, 0] }}
+              animate={{ 
+                opacity: [0.3, 1, 0.3],
+                scale: [0.8, 1.2, 0.8],
+              }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-3 h-12 bg-purple-600 rounded"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-cyan-400 rounded-full blur-sm"
+            />
+          </div>
+          
+          {/* Arms with smooth motion */}
+          <div className="flex justify-center gap-4">
+            <motion.div
+              animate={{ 
+                rotate: [0, -35, 0],
+                scaleY: [1, 1.1, 1],
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="w-4 h-14 bg-gradient-to-b from-purple-600 to-purple-800 rounded-full shadow-lg"
+              style={{ transformOrigin: 'top' }}
             />
             <motion.div
-              animate={{ rotate: [0, 30, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-3 h-12 bg-purple-600 rounded"
+              animate={{ 
+                rotate: [0, 35, 0],
+                scaleY: [1, 1.1, 1],
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="w-4 h-14 bg-gradient-to-b from-purple-600 to-purple-800 rounded-full shadow-lg"
+              style={{ transformOrigin: 'top' }}
             />
           </div>
         </motion.div>
-        {/* Floating text */}
+        
+        {/* Premium floating text with effects */}
         <motion.div
-          animate={{ opacity: [0, 1, 0], y: [-20, -40, -60] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute top-4 right-8 text-sm font-bold text-purple-600"
+          animate={{ 
+            opacity: [0, 1, 1, 0], 
+            y: [-20, -50, -80],
+            scale: [0.9, 1, 1.1],
+          }}
+          transition={{ duration: 3, repeat: Infinity }}
+          className="absolute top-8 right-12 px-4 py-2 bg-gradient-to-r from-violet-500 to-purple-600 rounded-full text-white text-sm font-bold shadow-xl"
         >
-          💡 Analyzing...
+          <span className="flex items-center gap-2">
+            <span className="text-yellow-300">✨</span>
+            Analyzing...
+          </span>
         </motion.div>
       </div>
     ),
     'Dashboard': (
-      <div className="relative w-full h-64 flex items-center justify-center">
-        {/* Dashboard Screen */}
+      <div className="relative w-full h-64 flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 rounded-2xl">
+        {/* Grid background */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="grid grid-cols-8 grid-rows-8 h-full w-full">
+            {[...Array(64)].map((_, i) => (
+              <motion.div
+                key={i}
+                animate={{ opacity: [0.1, 0.3, 0.1] }}
+                transition={{ duration: 2, repeat: Infinity, delay: i * 0.02 }}
+                className="border border-purple-300"
+              />
+            ))}
+          </div>
+        </div>
+        
+        {/* Dashboard Screen with premium effects */}
         <motion.div
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-40 h-32 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-3 relative"
+          animate={{ 
+            scale: [1, 1.03, 1],
+            rotateY: [-2, 2, -2],
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="relative z-10"
+          style={{ transformStyle: 'preserve-3d' }}
         >
-          {/* Screen Content */}
-          <div className="space-y-2">
-            <motion.div
-              animate={{ width: ['60%', '100%', '60%'] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="h-2 bg-white/30 rounded"
-            />
-            <div className="flex gap-1">
+          <div className="w-48 h-36 bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 rounded-2xl p-4 relative shadow-2xl border border-white/20">
+            {/* Screen glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-400/30 to-transparent rounded-2xl" />
+            
+            {/* Screen Content */}
+            <div className="space-y-3 relative z-10">
+              {/* Title bar */}
               <motion.div
-                animate={{ height: ['100%', '60%', '100%'] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
-                className="flex-1 bg-white/30 rounded"
-              />
-              <motion.div
-                animate={{ height: ['60%', '100%', '60%'] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
-                className="flex-1 bg-white/30 rounded"
-              />
+                animate={{ opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="flex items-center gap-2"
+              >
+                <div className="w-2 h-2 rounded-full bg-red-400" />
+                <div className="w-2 h-2 rounded-full bg-yellow-400" />
+                <div className="w-2 h-2 rounded-full bg-green-400" />
+                <div className="flex-1 h-1 bg-white/20 rounded" />
+              </motion.div>
+              
+              {/* Progress bar */}
+              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                <motion.div
+                  animate={{ width: ['0%', '100%'] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full shadow-lg shadow-cyan-500/50"
+                />
+              </div>
+              
+              {/* Chart bars */}
+              <div className="flex items-end gap-2 h-16">
+                {[0.4, 0.7, 0.9, 0.6, 0.8].map((height, i) => (
+                  <motion.div
+                    key={i}
+                    animate={{ 
+                      scaleY: [height, 1, height],
+                      boxShadow: [
+                        '0 0 5px rgba(34, 211, 238, 0.3)',
+                        '0 0 20px rgba(34, 211, 238, 0.6)',
+                        '0 0 5px rgba(34, 211, 238, 0.3)',
+                      ],
+                    }}
+                    transition={{ 
+                      duration: 2, 
+                      repeat: Infinity, 
+                      delay: i * 0.2,
+                      ease: "easeInOut",
+                    }}
+                    className="flex-1 bg-gradient-to-t from-cyan-400 to-blue-500 rounded-t origin-bottom"
+                    style={{ transformOrigin: 'bottom' }}
+                  />
+                ))}
+              </div>
             </div>
+            
+            {/* Reflection */}
+            <div className="absolute -bottom-1 left-0 right-0 h-8 bg-gradient-to-b from-white/5 to-transparent blur-sm rounded-b-2xl" />
           </div>
         </motion.div>
-        {/* Person looking at screen */}
+        
+        {/* Person with premium design */}
         <motion.div
-          animate={{ x: [20, 0, 20] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute left-4 top-20"
+          animate={{ x: [-10, 10, -10] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute left-8 bottom-12"
         >
-          <div className="w-8 h-8 bg-yellow-400 rounded-full mx-auto" />
-          <div className="w-6 h-8 bg-blue-500 mx-auto mt-1 rounded-sm" />
+          {/* Head */}
+          <motion.div
+            animate={{ rotate: [-5, 5, -5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full mx-auto shadow-xl relative"
+          >
+            {/* Hair */}
+            <div className="absolute -top-2 left-0 right-0 h-4 bg-gradient-to-br from-gray-800 to-gray-900 rounded-t-full" />
+          </motion.div>
+          
+          {/* Body */}
+          <div className="w-8 h-10 bg-gradient-to-b from-blue-600 to-blue-800 mx-auto mt-1 rounded-lg shadow-lg" />
+          
+          {/* Thought bubble */}
+          <motion.div
+            animate={{ 
+              opacity: [0, 1, 1, 0],
+              scale: [0.8, 1, 1, 0.8],
+              y: [0, -10, -20],
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
+            className="absolute -right-8 -top-4 bg-white rounded-full px-3 py-1 shadow-lg text-xs font-bold text-purple-600"
+          >
+            📊
+          </motion.div>
         </motion.div>
       </div>
     ),
     'Analytics': (
-      <div className="relative w-full h-64 flex items-center justify-center">
-        {/* Chart Bars */}
-        <div className="flex items-end gap-3 h-40">
+      <div className="relative w-full h-64 flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 rounded-2xl">
+        {/* Animated grid background */}
+        {[...Array(5)].map((_, i) => (
           <motion.div
-            animate={{ height: ['40%', '100%', '40%'] }}
-            transition={{ duration: 1, repeat: Infinity }}
-            className="w-4 bg-gradient-to-t from-orange-500 to-orange-400 rounded"
+            key={i}
+            animate={{ 
+              opacity: [0.05, 0.15, 0.05],
+              scaleY: [0.95, 1, 0.95],
+            }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity, 
+              delay: i * 0.3,
+            }}
+            className="absolute bottom-0 left-0 right-0 border-t border-orange-200"
+            style={{ top: `${20 * i}%` }}
           />
-          <motion.div
-            animate={{ height: ['60%', '100%', '60%'] }}
-            transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
-            className="w-4 bg-gradient-to-t from-orange-500 to-orange-400 rounded"
-          />
-          <motion.div
-            animate={{ height: ['80%', '100%', '80%'] }}
-            transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-            className="w-4 bg-gradient-to-t from-orange-500 to-orange-400 rounded"
-          />
-          <motion.div
-            animate={{ height: ['50%', '100%', '50%'] }}
-            transition={{ duration: 1, repeat: Infinity, delay: 0.6 }}
-            className="w-4 bg-gradient-to-t from-orange-500 to-orange-400 rounded"
-          />
+        ))}
+        
+        {/* Premium Chart Bars with 3D effect */}
+        <div className="flex items-end gap-4 h-48 relative z-10">
+          {[0.4, 0.65, 0.9, 0.7, 0.5].map((height, i) => (
+            <div key={i} className="relative">
+              {/* Shadow */}
+              <motion.div
+                animate={{ 
+                  scaleY: [height, 1, height],
+                  opacity: [0.2, 0.4, 0.2],
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity, 
+                  delay: i * 0.15,
+                  ease: "easeInOut",
+                }}
+                className="absolute -bottom-2 left-0 w-full h-full bg-orange-900/20 blur-xl rounded-t-lg"
+                style={{ transformOrigin: 'bottom' }}
+              />
+              
+              {/* Bar */}
+              <motion.div
+                animate={{ 
+                  scaleY: [height, 1, height],
+                  boxShadow: [
+                    '0 10px 40px rgba(249, 115, 22, 0.2)',
+                    '0 20px 60px rgba(249, 115, 22, 0.4)',
+                    '0 10px 40px rgba(249, 115, 22, 0.2)',
+                  ],
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity, 
+                  delay: i * 0.15,
+                  ease: "easeInOut",
+                }}
+                className="w-8 bg-gradient-to-t from-orange-600 via-orange-500 to-amber-400 rounded-t-xl relative"
+                style={{ 
+                  transformOrigin: 'bottom',
+                  height: '160px',
+                }}
+              >
+                {/* Shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-t-xl" />
+                
+                {/* Value label */}
+                <motion.div
+                  animate={{ 
+                    opacity: [0, 1, 0],
+                    y: [-10, -20, -30],
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity, 
+                    delay: i * 0.15 + 1,
+                  }}
+                  className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg whitespace-nowrap"
+                >
+                  {Math.round((height + 0.5) * 100)}%
+                </motion.div>
+              </motion.div>
+            </div>
+          ))}
         </div>
-        {/* Magnifying glass */}
+        
+        {/* Premium magnifying glass with glow */}
         <motion.div
-          animate={{ rotate: [0, 360] }}
-          transition={{ duration: 3, repeat: Infinity }}
-          className="absolute bottom-8 right-8 w-12 h-12 border-3 border-orange-500 rounded-full"
-        />
+          animate={{ 
+            rotate: [0, 360],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ 
+            rotate: { duration: 4, repeat: Infinity, ease: "linear" },
+            scale: { duration: 2, repeat: Infinity },
+          }}
+          className="absolute bottom-8 right-8"
+        >
+          {/* Glow */}
+          <motion.div
+            animate={{ 
+              opacity: [0.3, 0.6, 0.3],
+              scale: [1, 1.3, 1],
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute inset-0 bg-orange-400 rounded-full blur-xl"
+          />
+          
+          {/* Glass circle */}
+          <div className="relative w-14 h-14 border-4 border-orange-500 rounded-full bg-gradient-to-br from-orange-100/50 to-transparent backdrop-blur-sm shadow-xl">
+            {/* Handle */}
+            <div className="absolute -bottom-2 -right-2 w-6 h-8 border-4 border-orange-500 rounded-br-full rotate-45" />
+            
+            {/* Sparkle */}
+            <motion.div
+              animate={{ 
+                opacity: [0, 1, 0],
+                scale: [0.5, 1, 0.5],
+                rotate: [0, 180, 360],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute top-2 left-2 w-2 h-2 bg-white rounded-full"
+            />
+          </div>
+        </motion.div>
+        
+        {/* Floating trend arrow */}
+        <motion.div
+          animate={{ 
+            y: [0, -20, 0],
+            x: [-10, 10, -10],
+            rotate: [0, 5, 0],
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-8 right-16 text-3xl filter drop-shadow-lg"
+        >
+          📈
+        </motion.div>
       </div>
     ),
     'Invoices': (
