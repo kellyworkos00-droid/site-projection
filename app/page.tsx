@@ -13,12 +13,14 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AutoScroll from "@/components/AutoScroll";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import KellyAIChat from "@/components/KellyAIChat";
 
 export default function Home() {
   return (
     <main className="min-h-screen overflow-x-hidden w-full pt-24">
       <AutoScroll />
       <FloatingWhatsApp />
+      <KellyAIChat />
       <Navigation />
       <Hero />
       <WhatIsKelly />
