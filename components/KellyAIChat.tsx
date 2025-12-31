@@ -75,7 +75,7 @@ export default function KellyAIChat() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ duration: 0.3, type: "spring" }}
-            className="fixed bottom-24 right-6 z-50 w-96 h-[600px] bg-white rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-gray-200"
+            className="fixed bottom-24 right-6 z-50 w-[90vw] max-w-sm h-[70vh] max-h-[500px] md:w-96 md:h-[600px] bg-white rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-gray-200"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-violet-600 to-purple-600 p-4 flex items-center justify-between">
