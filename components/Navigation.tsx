@@ -62,7 +62,7 @@ export default function Navigation() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -15, scale: 0.9 }}
               transition={{ duration: 0.25, type: 'spring', stiffness: 300, damping: 30 }}
-              className="absolute top-full left-1/2 -translate-x-1/2 mt-2 md:mt-4 bg-gradient-to-b from-blue-500/30 to-blue-600/20 backdrop-blur-3xl border border-blue-400/50 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden w-[calc(100vw-24px)] md:w-80 max-h-[70vh] md:max-h-none overflow-y-auto"
+              className="absolute top-full left-1/2 -translate-x-1/2 mt-2 md:mt-4 bg-gradient-to-b from-blue-500/30 to-blue-600/20 backdrop-blur-3xl border border-blue-400/50 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden w-[calc(100vw-24px)] md:w-80 max-h-[70vh] md:max-h-none overflow-y-auto mx-auto"
             >
               <div className="py-3 md:py-4 px-2 space-y-1 md:space-y-2">
                 {navLinks.map((link, index) => (
