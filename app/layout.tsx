@@ -38,6 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="overflow-x-hidden">
       <head>
+        <meta name="google-site-verification" content="cMHnLLpXcbCWdIlsHVpS-4LzlKNpPauOw9c8_wrs2rM" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
