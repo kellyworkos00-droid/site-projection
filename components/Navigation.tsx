@@ -3,18 +3,18 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Sparkles, Zap, Layout, Layers, DollarSign, ArrowRight } from 'lucide-react';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { href: '#what-is-kelly', label: 'What is Kelly OS' },
-    { href: '#kelly-ai', label: 'Kelly AI' },
-    { href: '#how-it-works', label: 'How It Works' },
-    { href: '#modules', label: 'Features' },
-    { href: '#pricing', label: 'Pricing' },
-    { href: '#get-started', label: 'Get Started', cta: true },
+    { href: '#what-is-kelly', label: 'What is Kelly OS', icon: Layout, desc: 'Complete business system' },
+    { href: '#kelly-ai', label: 'Kelly AI', icon: Sparkles, desc: 'Intelligent assistant', featured: true },
+    { href: '#how-it-works', label: 'How It Works', icon: Zap, desc: 'Simple setup & onboarding' },
+    { href: '#modules', label: 'Features', icon: Layers, desc: 'Explore all modules' },
+    { href: '#pricing', label: 'Pricing', icon: DollarSign, desc: 'Flexible plans' },
+    { href: '#get-started', label: 'Get Started', icon: ArrowRight, cta: true, desc: 'Start your journey' },
   ];
 
   return (
@@ -58,32 +58,52 @@ export default function Navigation() {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+              initial={{ opacity: 0, y: -15, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 right-0 mt-3 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden"
+              exit={{ opacity: 0, y: -15, scale: 0.9 }}
+              transition={{ duration: 0.25, type: 'spring', stiffness: 300, damping: 30 }}
+              className="absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-white/15 backdrop-blur-2xl border border-white/30 rounded-3xl shadow-2xl overflow-hidden w-72"
             >
-              <div className="py-3 px-4 space-y-1 min-w-max">
+              <div className="py-4 px-2 space-y-2">
                 {navLinks.map((link, index) => (
                   <motion.div
                     key={link.href}
-                    initial={{ opacity: 0, x: -10 }}
+                    initial={{ opacity: 0, x: -15 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
+                    transition={{ delay: index * 0.06, duration: 0.3 }}
                   >
                     <Link
                       href={link.href}
                       onClick={() => setIsOpen(false)}
                       className={`
-                        block px-4 py-2.5 rounded-lg transition-all duration-200
+                        group flex items-start gap-3 px-4 py-3 rounded-2xl transition-all duration-300
                         ${link.cta
-                          ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:from-blue-700 hover:to-purple-700 hover:shadow-lg'
-                          : 'text-white/90 hover:text-white hover:bg-white/10 font-medium'
+                          ? 'bg-gradient-to-br from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-2xl hover:scale-105'
+                          : link.featured
+                          ? 'bg-white/10 hover:bg-white/20'
+                          : 'hover:bg-white/10'
                         }
                       `}
                     >
-                      {link.label}
+                      <div className={`mt-1 flex-shrink-0 ${link.cta ? 'text-white' : 'text-white/80 group-hover:text-white'} transition-colors`}>
+                        <link.icon className="w-5 h-5" />
+                      </div>
+                      <div className={`flex-1 ${link.cta ? 'text-white' : 'text-white/90'}`}>
+                        <div className={`font-bold text-sm leading-tight ${link.cta ? 'text-white' : 'text-white group-hover:text-white'}`}>
+                          {link.label}
+                        </div>
+                        <div className={`text-xs leading-tight mt-1 ${link.cta ? 'text-white/90' : 'text-white/60 group-hover:text-white/80'}`}>
+                          {link.desc}
+                        </div>
+                      </div>
+                      {link.featured && !link.cta && (
+                        <span className="flex-shrink-0 ml-2 bg-gradient-to-r from-violet-400 to-purple-400 text-purple-900 text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap">
+                          New
+                        </span>
+                      )}
+                      {link.cta && (
+                        <ArrowRight className="w-4 h-4 text-white flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                      )}
                     </Link>
                   </motion.div>
                 ))}
